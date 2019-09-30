@@ -1,6 +1,5 @@
 package Seção6;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ProductTester {
@@ -28,7 +27,7 @@ public class ProductTester {
 		if(maxSize==0) {
 			System.out.println("Não há produtos!");
 		}else {
-			ArrayList<Produto> produtos = new ArrayList<Produto>();
+			Produto[] produtos = new Produto[maxSize];
 			int i;
 			Produto produto;
 			for(i=0;i<maxSize;i++) {
@@ -47,7 +46,7 @@ public class ProductTester {
 				produto.setEstoque(tempQty);
 				produto.setPreco(tempPrice);
 				produto.setAtivo(true);
-				produtos.add(i, produto);
+				produtos[i]=produto;
 				
 			}
 			for(Produto p: produtos) {
