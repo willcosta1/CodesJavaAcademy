@@ -1,8 +1,6 @@
-package Seção7_1;
+package Seção7_2;
 
 import java.util.Scanner;
-
-import Seção7_2.Produto;
 
 public class ProductTester {
 	public static int getMenuOption(Scanner sc) {
@@ -44,21 +42,24 @@ public class ProductTester {
 	}
 
 	public static void addInventory(Produto[] produtos, Scanner sc) {
-		int productChoice, updateValue = -1;
-		productChoice = getProductNumber(produtos, sc);
+		int stockChoice = -1;
 		do {
 			try {
-				System.out.println("Quantos produtos deseja adicionar?");
-				updateValue = sc.nextInt();
+				System.out.println("1: CD\n2: DVD\nInsira o tipo de produto: \n");
+				stockChoice = sc.nextInt();
 			} catch (Exception e) {
 				System.out.println("Digite um valor válido");
 				sc.nextLine();
 			}
-			if (updateValue < 0) {
-				System.out.println("Digite um valor superior a zero");
+			if (stockChoice < 1 || stockChoice > 2) {
+				System.out.println("Somente os números 1 ou 2 são permitidos!");
 			}
-		} while (updateValue < 0);
-		//Produto.addToInventory();
+		} while (stockChoice < 1 || stockChoice > 2);
+		if(stockChoice==1) {
+			addCDToInventory(produtos,sc);
+		}else {
+			addDVDToInventory(produtos,sc);
+		}
 	}
 
 	public static void deductInventory(Produto[] produtos, Scanner sc) {
@@ -97,7 +98,7 @@ public class ProductTester {
 			displayInventory(produtos);
 			break;
 		case 2:
-			addToInventory(produtos, sc);
+			addInventory(produtos, sc);
 			break;
 		case 3:
 			deductInventory(produtos, sc);
@@ -116,11 +117,11 @@ public class ProductTester {
 			System.out.println("Não há produtos!");
 		} else {
 			Produto[] produtos = new Produto[maxSize];
-			addToInventory(produtos, sc);
+			addInventory(produtos, sc);
 			do {
 				menuChoice = getMenuOption(sc);
 				executeMenuChoice(menuChoice, produtos, sc);
-			} while (menuChoice!=0);
+			} while (menuChoice != 0);
 		}
 	}
 
@@ -130,29 +131,71 @@ public class ProductTester {
 		}
 	}
 
-	public static void addToInventory(Produto[] produtos, Scanner sc) {
-		int tempNumber, tempQty, i;
-		String tempName;
+	public static void addDVDToInventory(Produto[] produtos, Scanner sc) {
+		int tempNumber, tempQty, i, tempNumSongs;
+		String tempName, tempDuracao, tempFaixa, tempEstudio;
 		double tempPrice;
-		Produto produto;
+		DVD produto;
 		for (i = 0; i < produtos.length; i++) {
 			sc.nextLine();
-			System.out.println("Digite o nome: ");
+			System.out.println("Digite o nome do DVD: ");
 			tempName = sc.nextLine();
+			System.out.println("Digite o do estúdio cinematográfico: ");
+			tempEstudio = sc.nextLine();
+			System.out.println("Digite a classificação etária: ");
+			tempFaixa = sc.nextLine();
+			System.out.println("Insira a duração em minutos: ");
+			tempDuracao = sc.nextLine();
 			System.out.println("Digite a quantidade: ");
 			tempQty = sc.nextInt();
 			System.out.println("Digite o preço: ");
 			tempPrice = sc.nextDouble();
 			System.out.println("Digite o numero: ");
 			tempNumber = sc.nextInt();
-			produto = new Produto();
+			produto = new DVD();
 			produto.setNome(tempName);
 			produto.setNum(tempNumber);
 			produto.setEstoque(tempQty);
 			produto.setPreco(tempPrice);
+			produto.setFaixa(tempFaixa);
+			produto.setDuracao(tempDuracao);
+			produto.setEstudio(tempEstudio);
 			produto.setAtivo(true);
 			produtos[i] = produto;
+		}
+	}
 
+	public static void addCDToInventory(Produto[] produtos, Scanner sc) {
+		int tempNumber, tempQty, i, tempNumSongs;
+		String tempName, tempArtista, tempSelo;
+		double tempPrice;
+		CD produto;
+		for (i = 0; i < produtos.length; i++) {
+			sc.nextLine();
+			System.out.println("Digite o nome do CD: ");
+			tempName = sc.nextLine();
+			System.out.println("Digite o nome do artista: ");
+			tempArtista = sc.nextLine();
+			System.out.println("Digite o nome do selo de gravação: ");
+			tempSelo = sc.nextLine();
+			System.out.println("Digite o número de músicas: ");
+			tempNumSongs = sc.nextInt();
+			System.out.println("Digite a quantidade: ");
+			tempQty = sc.nextInt();
+			System.out.println("Digite o preço: ");
+			tempPrice = sc.nextDouble();
+			System.out.println("Digite o numero: ");
+			tempNumber = sc.nextInt();
+			produto = new CD();
+			produto.setNome(tempName);
+			produto.setNum(tempNumber);
+			produto.setEstoque(tempQty);
+			produto.setPreco(tempPrice);
+			produto.setArtista(tempArtista);
+			produto.setSelo(tempSelo);
+			produto.setNumSongs(tempNumSongs);
+			produto.setAtivo(true);
+			produtos[i] = produto;
 		}
 	}
 

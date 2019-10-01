@@ -1,4 +1,4 @@
-package Seção7_1;
+package Seção7_2;
 
 
 public class Produto {
@@ -8,8 +8,14 @@ public class Produto {
 	private int estoque;
 	private double preco;
 	private Boolean ativo;
-	public static void addToInventory() {
-		//implementar
+	public static Produto addToInventory(Produto p,int quant) {
+		if(p.ativo==false) {
+			System.out.println("Não é possível adicionar a uma linha descontinuada!");
+		}else {
+			p.setEstoque(p.getEstoque()+quant);
+			System.out.println("Adicionado");
+		}
+		return p;
 	}
 	public static Produto deductFromInventory(Produto p,int quant) {
 		p.setEstoque(p.getEstoque()-quant);
@@ -18,6 +24,12 @@ public class Produto {
 	//iniciar com valores padrões
 	public Produto() {
 		
+	}
+	public Produto(int num,String nome,int estoque,double preco, String duracao, String faixa, String estudio) {
+		super();
+	}
+	public Produto(int num,String nome,int estoque,double preco, String artista, int numSongs, String selo) {
+		super();
 	}
 	public Produto(int num,String nome,int estoque,double preco) {
 		this.num = num;
