@@ -2,8 +2,6 @@ package secao7_1;
 
 import java.util.Scanner;
 
-import secao7_2.Produto;
-
 public class ProductTester {
 	public static int getMenuOption(Scanner sc) {
 		int optionMenu = -1;
