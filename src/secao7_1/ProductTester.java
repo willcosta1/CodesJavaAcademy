@@ -25,7 +25,6 @@ public class ProductTester {
 				System.out.println("\n -------------- Produtos --------------\n");
 				for (i = 0; i < produtos.length; i++) {
 					System.out.println("Índice: " + i + " Nome: " + produtos[i].getNome() + "\n");
-					System.out.println("aa"+produtos.length);
 				}
 				System.out.println("Digite índice do produto: ");
 				productChoice = sc.nextInt();
@@ -56,7 +55,7 @@ public class ProductTester {
 				System.out.println("Digite um valor superior a zero");
 			}
 		} while (updateValue < 0);
-		//Produto.addToInventory();
+		produtos[productChoice]=Produto.addToInventory(produtos[productChoice],updateValue);
 	}
 
 	public static void deductInventory(Produto[] produtos, Scanner sc) {
@@ -95,7 +94,7 @@ public class ProductTester {
 			displayInventory(produtos);
 			break;
 		case 2:
-			addToInventory(produtos, sc);
+			addInventory(produtos, sc);
 			break;
 		case 3:
 			deductInventory(produtos, sc);
